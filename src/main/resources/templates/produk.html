@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="_layout">
+
+    <head>
+        <title>Produk</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <main>
+                <section class="py-5 text-center container">
+                    <div class="row py-lg-3">
+                        <div class="col-lg-6 col-md-8 mx-auto">
+                            <h1 class="fw-light display-1">Produk</h1>
+                            <p>Cari Kebutuhan Anda Di Sini :)</p>
+                        </div>
+                    </div>
+                </section>
+                <div class="album py-5 bg-light">
+                    <div class="container">
+                        <form method="GET" th:object="${searchForm}" th:action="@{/search}" >
+                            <div class="form-group">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <a href="/addTransaksi" class="btn btn-primary" style="padding-top: 10px; padding-bottom: 10px;">
+                                            <i class="fa fa-plus-circle"></i>TAMBAH PRODUK
+                                        </a>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <a href="/openpdf/produk" class="btn btn-success mx-3"
+                                           style="padding-top: 10px; padding-bottom: 10px">EXPORT PDF</a>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="Cari berdasarkan nama produk" th:field="*{keyword}">
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-primary" style="padding-top: 10px; padding-bottom:10px;">
+                                            <i class="fa fa-search"></i>CARI
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="card">
+                            <div class="card-body text-center container">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th>Nama Produk</th>
+                                                <th>Harga</th>
+                                                <th>Stok</th>
+                                                <th>Kategori</th>
+                                                <th>ACTION</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="beli : ${produk}">
+                                                <th scope="row"></th>
+                                                <td th:text="${beli.namaProduk}"></td>
+                                                <td th:text="${#numbers.formatDecimal(beli.harga, 2, 'COMMA', 3, 'POINT')}"></td>
+                                                <td th:text="${beli.stok}"></td>
+                                                <td th:text="${beli.kategori}"></td>
+                                                <td>
+                                                    <a th:href="@{'/viewProduk/'+${beli.id}}" class="btn btn-success btn-sm">View</a>
+                                                    <a th:href="@{'/edit/' +${beli.id}}" class="btn btn-warning btn-sm">Edit</a>
+                                                    <a class="btn btn-danger btn-sm" th:href="@{'/delete/' +${beli.id}}" 
+                                                       onclick="return confirm('Yakin mau hapus data?')">Delete</a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </body>
+</html>

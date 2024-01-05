@@ -1,0 +1,44 @@
+{
+    "elements": {},
+    "attributes": {
+        "th:text": {
+            "context": "td"
+        },
+        "charset": {
+            "context": "meta"
+        },
+        "th:object": {
+            "context": "form"
+        },
+        "th:action": {
+            "context": "form"
+        },
+        "th:field": {
+            "context": "input"
+        },
+        "th:each": {
+            "context": "tr"
+        },
+        "th:if": {
+            "context": "div"
+        },
+        "th:unless": {
+            "context": "h4"
+        },
+        "name": {
+            "context": "meta"
+        },
+        "th:href": {
+            "context": "a"
+        },
+        "th:class": {
+            "context": "li"
+        },
+        "layout:fragment": {
+            "context": "div"
+        },
+        "th:style": {
+            "context": "a"
+        }
+    }
+}

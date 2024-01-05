@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Data Produk Pelanggan</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Other head elements go here -->
+</head>
+<body>
+    <main>
+        <section class="py-5 text-center container">
+            <div class="row py-lg-3">
+                <div class="col-lg-6 col-md-8 mx-auto">
+                    <h1 class="fw-light display-1">Data Produk Pelanggan</h1>
+                    <p>Lihat Daftar Produk Yang Tersedia :)</p>
+                </div>
+            </div>
+        </section>
+        <div class="album py-5 bg-light">
+            <div class="container">
+                <form method="GET" th:object="${searchForm}" th:action="@{/search}" >
+                    <div class="form-group">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Cari berdasarkan nama produk" th:field="*{keyword}">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-primary" style="padding-top: 10px; padding-bottom:10px;">
+                                    <i class="fa fa-search"></i>CARI
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="card">
+                    <div class="card-body text-center container">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th>Nama Produk</th>
+                                        <th>Harga</th>
+                                        <th>Stok</th>
+                                        <th>Kategori</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="produk : ${produk}">
+                                        <th scope="row"></th>
+                                        <td th:text="${produk.namaProduk}"></td>
+                                        <td th:text="${#numbers.formatDecimal(produk.harga, 2, 'COMMA', 3, 'POINT')}"></td>
+                                        <td th:text="${produk.stok}"></td>
+                                        <td th:text="${produk.kategori}"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- Tombol untuk kembali ke halaman home -->
+                <div class="d-flex justify-content-center mt-3">
+                    <a th:href="@{'/home'}" class="btn btn-primary">Kembali ke Home</a>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
+    <!-- Other scripts go here -->
+</body>
+</html>

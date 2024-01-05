@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="_layout">
+
+<head>
+    <title>Transaksi Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+<body>
+    <div layout:fragment="content">
+        <main>
+            <section class="py-5 text-center container">
+                <div class="row py-lg-3">
+                    <div class="col-lg-6 col-md-8 mx-auto">
+                        <h1 class="fw-light display-1">Transaksi Details</h1>
+                        <p>Transaksi mudah tanpa ribet</p>
+                    </div>
+                </div>
+            </section>
+
+            <div class="album py-5 bg-light">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 th:if="${transaksi}" th:text="'Produk: ' + ${transaksi.namaProduk}" class="card-title"></h4>
+                                <h4 th:unless="${transaksi}">Transaksi not found</h4>
+                            </div>
+
+                            <div class="card-body" th:if="${transaksi}">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item" th:text="'Harga Produk : ' + ${#numbers.formatDecimal(transaksi.harga, 2, 'COMMA', 3, 'POINT')} + ' rupiah'"></li>
+                                    <li class="list-group-item" th:text="'Jumlah Beli : ' + ${transaksi.jumlahBeli} + ' pcs'"></li>
+                                    <li class="list-group-item" th:text="'Total Harga : ' + ${#numbers.formatDecimal(transaksi.totalHarga, 2, 'COMMA', 3, 'POINT')} + ' rupiah'"></li>
+                                    <li class="list-group-item" th:text="'Tanggal Transaksi : ' + ${transaksi.tglTransaksi}"></li>
+                                </ul>
+                            </div>
+
+                            <div class="card-footer">
+                                <a href="/transaksi" class="btn btn-primary btn-lg w-100" role="button" aria-pressed="true">BACK</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>
